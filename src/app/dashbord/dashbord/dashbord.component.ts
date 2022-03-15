@@ -16,5 +16,5 @@ export class DashbordComponent implements OnInit {
     this.postS.GetPostPosts().subscribe({
       next: (res) => (this.postes = res),
     });
-  }
+  }  
 }

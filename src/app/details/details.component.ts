@@ -1,7 +1,7 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PostService } from '../services/post/post.service';
-import {} from '../services/post/post.service';
 
 @Component({
   selector: 'app-details',
@@ -9,7 +9,11 @@ import {} from '../services/post/post.service';
   styleUrls: ['./details.component.css'],
 })
 export class DetailsComponent implements OnInit {
-  constructor(private postS: PostService, private route: ActivatedRoute) {}
+  constructor(
+    private postS: PostService,
+    private route: ActivatedRoute,
+    private _location: Location
+  ) {}
   postSelected: any | undefined = { userId: 0, id: 0, title: '', body: '' };
   Comment: any | undefined;
   ngOnInit(): void {
@@ -21,12 +25,18 @@ export class DetailsComponent implements OnInit {
       .subscribe({
         next: (res) => {
           this.postSelected = res;
+          this.GetComment(this.postSelected.id);
         },
         error: (err) => console.log(err),
       });
-    this.postS.GetCommentID('1').subscribe({
+  }
+  GetComment(id) {
+    this.postS.GetCommentID(id).subscribe({
       next: (res) => (this.Comment = res),
       error: (err) => console.log(err),
     });
+  }
+  GoBack() {
+    this._location.back();
   }
 }

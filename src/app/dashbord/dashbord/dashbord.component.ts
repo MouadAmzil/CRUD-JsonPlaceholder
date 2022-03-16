@@ -1,20 +1,30 @@
 import { Component, OnInit } from '@angular/core';
 import { PostService } from 'src/app/services/post/post.service';
-
 @Component({
   selector: 'app-dashbord',
   templateUrl: './dashbord.component.html',
   styleUrls: ['./dashbord.component.css'],
 })
 export class DashbordComponent implements OnInit {
-  constructor(private postS: PostService) {}
-  postes: any;
-  ngOnInit(): void {
+  constructor(private postS: PostService) {
     this.GetAllPosts();
   }
+  postes: any;
+  FilterListPostes: any;
+  counter: number = 10;
+  ngOnInit(): void {}
   GetAllPosts() {
     this.postS.GetPostPosts().subscribe({
-      next: (res) => (this.postes = res),
+      next: (res) => {
+        this.postes = res;
+        this.FilterListPostes = this.postes.filter((obj) => obj.id < 10);
+      },
     });
-  }  
+  }
+  SelectCountList(event) {
+    this.counter = event.target.value;
+    this.FilterListPostes = this.postes.filter(
+      (obj) => obj.id < event.target.value
+    );
+  }
 }

@@ -5,6 +5,7 @@ import { AddPostComponent } from './add-post/add-post.component';
 import { DashbordComponent } from './dashbord/dashbord/dashbord.component';
 import { DetailsComponent } from './details/details.component';
 import { AuthGuard } from './guards/login/auth.guard';
+import { IsNotLoginGuard } from './guards/login/is-not-login.guard';
 import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
@@ -20,7 +21,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   { path: 'add_post', component: AddPostComponent, canActivate: [AuthGuard] },
-  { path: 'login', component: LoginComponent },
+  { path: 'login', component: LoginComponent, canActivate: [IsNotLoginGuard] },
 ];
 
 @NgModule({

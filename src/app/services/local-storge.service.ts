@@ -16,14 +16,12 @@ export class LocalStorgeService {
   }
   BooleenCheckUser(): boolean {
     let User = this.GEtLoaclStorageLogin();
-    console.log('knt hna');
     if (User === []) {
       return false;
     }
     return true;
   }
   DELETELoaclStorageLogin() {
-    console.log(localStorage.removeItem('userLogin'));
-    localStorage.removeItem('userLogin');
+    localStorage.clear();
   }
 }

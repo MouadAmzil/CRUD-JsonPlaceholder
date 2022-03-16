@@ -1,24 +1,25 @@
 import { Injectable } from '@angular/core';
 import {
-  // ActivatedRouteSnapshot,
+  ActivatedRouteSnapshot,
   CanActivate,
-  // RouterStateSnapshot,
-  // UrlTree,
+  Router,
+  RouterStateSnapshot,
+  UrlTree,
 } from '@angular/router';
-import { Router } from '@angular/router'; // import router from angular router
-// import { Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { LocalStorgeService } from 'src/app/services/local-storge.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AuthGuard implements CanActivate {
+export class IsNotLoginGuard implements CanActivate {
   constructor(private _localSV: LocalStorgeService, private _router: Router) {}
+
   canActivate(): boolean {
     if (this._localSV.GEtLoaclStorageLogin() === null) {
-      this._router.navigate(['/dashboard']);
-      return false;
+      return true;
     }
-    return true;
+    this._router.navigate(['']);
+    return false;
   }
 }

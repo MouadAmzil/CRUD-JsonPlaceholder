@@ -7,6 +7,7 @@ import { DetailsComponent } from './details/details.component';
 import { AuthGuard } from './guards/login/auth.guard';
 import { IsNotLoginGuard } from './guards/login/is-not-login.guard';
 import { LoginComponent } from './login/login.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 const routes: Routes = [
   { path: 'dashboard', component: DashbordComponent, canActivate: [AuthGuard] },
@@ -22,6 +23,7 @@ const routes: Routes = [
   },
   { path: 'add_post', component: AddPostComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent, canActivate: [IsNotLoginGuard] },
+  { path: '**', component: PageNotFoundComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({

@@ -16,7 +16,7 @@ export class AuthGuard implements CanActivate {
   constructor(private _localSV: LocalStorgeService, private _router: Router) {}
   canActivate(): boolean {
     if (this._localSV.GEtLoaclStorageLogin() === null) {
-      this._router.navigate(['/dashboard']);
+      this._router.navigate(['/login']);
       return false;
     }
     return true;

@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AddPostComponent } from './add-post/add-post.component';
-// import { DetailComponent } from './details/detail.component';
 import { DashbordComponent } from './dashbord/dashbord/dashbord.component';
 import { DetailsComponent } from './details/details.component';
+import { EditComponent } from './edit/edit.component';
 import { AuthGuard } from './guards/login/auth.guard';
 import { IsNotLoginGuard } from './guards/login/is-not-login.guard';
 import { LoginComponent } from './login/login.component';
@@ -19,6 +19,11 @@ const routes: Routes = [
   {
     path: 'details/:id',
     component: DetailsComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'edit/:id',
+    component: EditComponent,
     canActivate: [AuthGuard],
   },
   { path: 'add_post', component: AddPostComponent, canActivate: [AuthGuard] },

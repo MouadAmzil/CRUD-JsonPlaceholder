@@ -22,6 +22,9 @@
                                 <th scope="col" class="relative py-3 px-6">
                                     <span class="sr-only">Details</span>
                                 </th>
+                                <th scope="col" class="relative py-3 px-6">
+                                    <span class="sr-only">Edit</span>
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -38,6 +41,10 @@
                                 <td class="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
                                     <a routerLink="/details/{{poste.id}}" href="#"
                                         class="text-blue-600 dark:text-blue-500 hover:underline">Details</a>
+                                </td>
+                                <td class="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
+                                    <a routerLink="/edit/{{poste.id}}" href="#"
+                                        class="text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
                                 </td>
                             </tr>
 

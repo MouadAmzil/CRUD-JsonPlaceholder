@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { User } from '../models/user.interface';
-import { Admin } from '../common/Admin';
+import { Admin } from '../common/admin.data';
 @Injectable({
   providedIn: 'root',
 })

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PostService } from 'src/app/services/post/post.service';
+import { Admin } from '../../common/admin.data';
 @Component({
   selector: 'app-dashbord',
   templateUrl: './dashbord.component.html',
@@ -9,10 +10,13 @@ export class DashbordComponent implements OnInit {
   constructor(private postS: PostService) {
     this.GetAllPosts();
   }
+  ISAdmin: boolean = false;
   postes: any;
   FilterListPostes: any;
   counter: number = 10;
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.ISAdmin = Admin.ThisUSerISAdmin;
+  }
   GetAllPosts() {
     this.postS.GetPostPosts().subscribe({
       next: (res) => {

@@ -1,11 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormControl,
-  Validators,
-  FormGroup,
-  FormBuilder,
-} from '@angular/forms';
+import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { LocalStorgeService } from '../services/local-storge.service';
+import { Router } from '@angular/router'; // import router from angular router
 
 @Component({
   selector: 'app-login',
@@ -15,31 +11,28 @@ import { LocalStorgeService } from '../services/local-storge.service';
 export class LoginComponent implements OnInit {
   public login: FormGroup;
   public message = '';
-
   constructor(
     private fb: FormBuilder,
-    private localStorge: LocalStorgeService
+    private localStorge: LocalStorgeService,
+    private routes: Router
   ) {
     this.login = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
     });
   }
-
   ngOnInit(): void {
     this.hiddenNav();
   }
-
   SubmitUSer() {
     if (this.login.valid) {
-      console.log(this.login.value);
       this.localStorge.SETLoaclStorageLogin(this.login.value);
+      this.routes.navigate(['/dashboard']);
     } else {
       this.message = 'Invalid Input';
       this.localStorge.DELETELoaclStorageLogin();
     }
   }
-
   ngOnDestroy(): void {
     this.DisplayNav();
   }
@@ -49,6 +42,6 @@ export class LoginComponent implements OnInit {
   }
   DisplayNav() {
     let nav = document.getElementById('navBar');
-    nav.style.display = 'none';
+    nav.style.display = 'block';
   }
 }

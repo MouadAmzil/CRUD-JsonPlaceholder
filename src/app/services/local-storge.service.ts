@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { json } from 'express';
 
 @Injectable({
   providedIn: 'root',
@@ -14,6 +13,14 @@ export class LocalStorgeService {
     let User: object = [];
     User = JSON.parse(localStorage.getItem('userLogin'));
     return User;
+  }
+  BooleenCheckUser(): boolean {
+    let User = this.GEtLoaclStorageLogin();
+    console.log('knt hna');
+    if (User === []) {
+      return false;
+    }
+    return true;
   }
   DELETELoaclStorageLogin() {
     console.log(localStorage.removeItem('userLogin'));

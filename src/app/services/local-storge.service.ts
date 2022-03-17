@@ -14,8 +14,8 @@ export class LocalStorgeService {
   };
 
   SETLoaclStorageLogin(obj: object) {
-    this.checkISAdmin(obj['email'], obj['password']);
     localStorage.setItem('userLogin', JSON.stringify(obj));
+    this.checkISAdmin();
   }
   GEtLoaclStorageLogin(): object {
     let User: object = [];
@@ -34,13 +34,17 @@ export class LocalStorgeService {
     localStorage.clear();
   }
 
-  checkISAdmin(email: string, password: string) {
-    for (let i = 0; i < Admin.ListOFAdmin.length; i++) {
-      if (
-        Admin.ListOFAdmin[i].email === email &&
-        Admin.ListOFAdmin[i].password === password
-      ) {
-        Admin.ThisUSerISAdmin = true;
+  checkISAdmin() {
+    let use = this.GEtLoaclStorageLogin();
+    if (use) {
+      console.log(use);
+      for (let i = 0; i < Admin.ListOFAdmin.length; i++) {
+        if (
+          Admin.ListOFAdmin[i].email === use['email'] &&
+          Admin.ListOFAdmin[i].password === use['password']
+        ) {
+          Admin.ThisUSerISAdmin = true;
+        }
       }
     }
   }

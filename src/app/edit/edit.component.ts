@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PostService } from '../services/post/post.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
 @Component({
   selector: 'app-edit',
   templateUrl: './edit.component.html',
@@ -21,9 +20,9 @@ export class EditComponent implements OnInit {
     private _PostSV: PostService,
     private _route: ActivatedRoute,
     private _location: Location,
-    private _fb: FormBuilder
+    private _fb: FormBuilder,
+    private _PostService: PostService
   ) {}
-
   ngOnInit(): void {
     this.setForm();
     this.GetPost();
@@ -40,10 +39,16 @@ export class EditComponent implements OnInit {
       });
   }
   deletePost() {
-    console.log('first');
+    this._PostService.DeletePost(this.post['id']).subscribe({
+      next: (res) => console.log(res),
+      error: (err) => console.log(err),
+    });
   }
   updatePost() {
-    console.log('first Post');
+    this._PostService.UpdatePost('').subscribe({
+      next: (res) => console.log(res),
+      error: (err) => console.log(err),
+    });
   }
   GoBack() {
     this._location.back();

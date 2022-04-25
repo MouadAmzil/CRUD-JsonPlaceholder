@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PostService } from '../services/post/post.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 @Component({
@@ -21,6 +21,7 @@ export class EditComponent implements OnInit {
     private _route: ActivatedRoute,
     private _location: Location,
     private _fb: FormBuilder,
+    private routes: Router,
     private _PostService: PostService
   ) {}
   ngOnInit(): void {
@@ -43,12 +44,14 @@ export class EditComponent implements OnInit {
       next: (res) => console.log(res),
       error: (err) => console.log(err),
     });
+    this.routes.navigate(['/dashboard']);
   }
   updatePost() {
     this._PostService.UpdatePost('').subscribe({
       next: (res) => console.log(res),
       error: (err) => console.log(err),
     });
+    this.routes.navigate(['/dashboard']);
   }
   GoBack() {
     this._location.back();
